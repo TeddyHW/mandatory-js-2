@@ -1,15 +1,23 @@
-h1 {
-text-align: center;
+body {
+  background-color: #ff3333;
 }
 
-h2 {
+h1 {
+  height: 100px;
+  background-color: #ff3333;
   text-align: center;
 }
 
+.container {
+  padding-top: 5px;
+  height: 500px;
+  background-color: white;
+}
+
 .box {
-  width: 150px;
-  height: 150px;
-  border: 1px solid black;
+  width: 130px;
+  height: 130px;
+  border: 1.5px solid black;
   display: flex;
   align-content: center;
   flex-wrap: wrap;
@@ -31,13 +39,13 @@ h2 {
 }
 
 #circle {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   -webkit-border-radius: 25px;
   -moz-border-radius: 25px;
   border-radius: 25px;
-  background: red;
-  border: 2px solid black;
+  background: #e82222;
+  border: 1.5px solid black;
 }
 
 button {
@@ -46,6 +54,6 @@ button {
   width: 110px;
   height: 80px;
   position: fixed;
-  top: 83%;
-  left: 46.3%;
+  top: 78%;
+  left: 46.5%;
 }

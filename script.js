@@ -1,38 +1,56 @@
+// -----Funktioner är i toppen-----
+// ----- Skapande av variabler samt kallande på funktioner börjar
+// på rad 250 i botten av filen-----
+
+// -----MAIN FUNKTION-----
 function AddSomething(e) {
   console.log(e.target);
   circleOrCross();
   if (e.target.matches(".box")) {
 
-    if (xInRow === true) {
-      alert("X Won!")
-      return;
-    }
-    if (oInRow === true) {
-      alert("O Won!")
-      return;
-    }
-
-    if (positions === 9) {
-      alert("Tie!");
-      return;
-    }
-
-    if (isCross) {
-      e.target.append(addCross());
-      crossTOrF(e.target.id)
-    }
-    else if (isCircle) {
-      e.target.append(addCircle());
-      circleTOrF(e.target.id)
-    }
-
-    positions++;
+    // Kollar om någon har vunnit eller om spelet är slut
     xWin();
     oWin();
+    if (xInRow === true || oInRow === true || positions === 9) {
+      alert("Game is over! Press reset button to start over.")
+      return;
+    }
 
+    // Kollar ifall boxen redan är fylld
+    boxFilled(e.target.id);
+
+    if (boxfull === false) {
+      // Lägger till Kryss eller Cirkel
+      if (isCross) {
+        e.target.append(addCross());
+        crossTOrF(e.target.id)
+      }
+      else if (isCircle) {
+        e.target.append(addCircle());
+        circleTOrF(e.target.id)
+      }
+
+      // Visar vem som vann
+      xWin();
+      oWin();
+      if (xInRow === true) {
+        alert("X Won!")
+      }
+      if (oInRow === true) {
+        alert("O Won!")
+      }
+      if (positions === 9) {
+        alert("Tie!");
+      }
+      positions++;
+    }
+    else { // Ifall boxen redan var full så skippas inte spelarens tur
+      circleOrCross();
+    }
   }
 }
 
+// -----VEMS TUR-----
 function circleOrCross() {
   if (!isCircle && !isCross) {
     isCircle = true;
@@ -47,18 +65,21 @@ function circleOrCross() {
   }
 }
 
+// -----SKAPAR KRYSS-----
 function addCross() {
 	let newCross = document.createElement("p");
 	newCross.innerHTML = "&#10060;";
 	return newCross;
 }
 
+// -----SKAPAR CIRKEL-----
 function addCircle() {
 	let newCircle = document.createElement("div");
 	newCircle.setAttribute('id', 'circle');
 	return newCircle;
 }
 
+// -----KOLLAR OM KRYSS HAR VUNNIT-----
 function xWin() {
 	if( cross1 === true && cross2 === true && cross3 === true ||
       cross4 === true && cross5 === true && cross6 === true ||
@@ -72,6 +93,7 @@ function xWin() {
 	}
 }
 
+// -----KOLLAR OM CIRKEL HAR VUNNIT-----
 function oWin() {
 	if( circle1 === true && circle2 === true && circle3 === true ||
       circle4 === true && circle5 === true && circle6 === true ||
@@ -85,6 +107,7 @@ function oWin() {
 	}
 }
 
+// -----HÅLLER KOLL PÅ VAR DET FINNS KRYSS-----
 function crossTOrF(box) {
 	switch(box) {
 		case "num1":
@@ -117,6 +140,7 @@ function crossTOrF(box) {
 	}
 }
 
+// -----HÅLLER KOLL PÅ VAR DET FINNS CIRKLAR-----
 function circleTOrF(box) {
 	switch(box) {
 		case "num1":
@@ -149,7 +173,59 @@ function circleTOrF(box) {
 	}
 }
 
+// -----KOLLAR OM BOXEN ÄR TOM-----
+function boxFilled(box) {
+  boxfull = false;
+	switch(box) {
+		case "num1":
+			if (box1.innerHTML !== "") {
+        boxfull = true;
+      }
+			break;
+		case "num2":
+      if (box2.innerHTML !== "") {
+        boxfull = true;
+      }
+			break;
+		case "num3":
+      if (box3.innerHTML !== "") {
+        boxfull = true;
+      }
+			break;
+		case "num4":
+      if (box4.innerHTML !== "") {
+        boxfull = true;
+      }
+			break;
+		case "num5":
+      if (box5.innerHTML !== "") {
+        boxfull = true;
+      }
+			break;
+		case "num6":
+      if (box6.innerHTML !== "") {
+        boxfull = true;
+      }
+			break;
+		case "num7":
+      if (box7.innerHTML !== "") {
+        boxfull = true;
+      }
+			break;
+		case "num8":
+      if (box8.innerHTML !== "") {
+        boxfull = true;
+      }
+			break;
+		case "num9":
+      if (box9.innerHTML !== "") {
+        boxfull = true;
+      }
+			break;
+	}
+}
 
+// -----RESET KNAPP-----
 function onClick(e) {
   box1.innerHTML = "";
   box2.innerHTML = "";
@@ -160,34 +236,20 @@ function onClick(e) {
   box7.innerHTML = "";
   box8.innerHTML = "";
   box9.innerHTML = "";
-  cross1 = false;
-  cross2 = false;
-  cross3 = false;
-  cross4 = false;
-  cross5 = false;
-  cross6 = false;
-  cross7 = false;
-  cross8 = false;
-  cross9 = false;
-  circle1 = false;
-  circle2 = false;
-  circle3 = false;
-  circle4 = false;
-  circle5 = false;
-  circle6 = false;
-  circle7 = false;
-  circle8 = false;
-  circle9 = false;
+  cross1 = cross2 = cross3 = cross4 = cross5 =
+  cross6 = cross7 = cross8 = cross9 = false;
 
-  isCross = false;
-  isCircle = false;
+  circle1 = circle2 = circle3 = circle4 = circle5 =
+  circle6 = circle7 = circle8 = circle9 = false;
 
-  xInRow = false;
-  oInRow = false;
-
+  isCircle = isCross = false;
+  oInRow = xInRow = false;
   positions = 0;
 }
 
+// -----SLUT PÅ FUNKTIONER-----
+
+// Skapar variabler för kryss och cirklar
 let cross1 = false;
 let cross2 = false;
 let cross3 = false;
@@ -207,9 +269,11 @@ let circle7 = false;
 let circle8 = false;
 let circle9 = false;
 
+// Skapar variabler för vems tur det är
 let isCross = false;
 let isCircle = false;
 
+// Skapar variabler för boxarna
 let box1 = document.querySelector("#num1");
 let box2 = document.querySelector("#num2");
 let box3 = document.querySelector("#num3");
@@ -220,13 +284,19 @@ let box7 = document.querySelector("#num7");
 let box8 = document.querySelector("#num8");
 let box9 = document.querySelector("#num9");
 
+let boxfull = false;
+
+// Skapar variabler för vem som vann
 let xInRow = false;
 let oInRow = false;
 
+// Skapar variabel för hur många rutor som är fyllda
 let positions = 0;
 
 
+// -----KALLAR PÅ MAIN FUNKTIONEN-----
 document.addEventListener("click", AddSomething);
 
+// -----KALLAR PÅ KNAPP FUNKTIONEN-----
 let myButton = document.querySelector("button");
 myButton.addEventListener("click", onClick);

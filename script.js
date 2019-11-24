@@ -1,4 +1,4 @@
-// -----Funktioner är i toppen-----
+// -----Funktionerna är i toppen-----
 // ----- Skapande av variabler samt kallande på funktioner börjar
 // på rad 250 i botten av filen-----
 
@@ -12,7 +12,7 @@ function AddSomething(e) {
     xWin();
     oWin();
     if (xInRow === true || oInRow === true || positions === 9) {
-      alert("Game is over! Press reset button to start over.")
+      alert("Game is over! Press the reset button to play again.")
       return;
     }
 
@@ -35,14 +35,16 @@ function AddSomething(e) {
       oWin();
       if (xInRow === true) {
         alert("X Won!")
+        return;
       }
       if (oInRow === true) {
         alert("O Won!")
+        return;
       }
+      positions++;
       if (positions === 9) {
         alert("Tie!");
       }
-      positions++;
     }
     else { // Ifall boxen redan var full så skippas inte spelarens tur
       circleOrCross();
